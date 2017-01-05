@@ -42,7 +42,7 @@ window.onload = function() {
 			});
 	    },
 		move: function(e) {
-			this.x = e.localX;
+			this.x = e.localX - 16;
 		},
 		attack: function(){
 			log('attack()');
