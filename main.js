@@ -172,7 +172,7 @@ window.onload = function() {
 	});
 
 	//プレイグラウンド初期化
-	var core = new Core(320, 320);
+	var core = new Core(320, 420);
 	//core.scale = 2;
 	core.preload('res/sprite.png');
 	core.preload('res/tokutenLabel.png');
@@ -185,7 +185,7 @@ window.onload = function() {
 	core.onload = function() {
 
 		//プレイヤーキャラの初期化
-		var player = new Player(30,180,32,32);
+		var player = new Player(30,320,32,32);
 		core.rootScene.addChild(player);
 
 		//敵キャラの初期化
