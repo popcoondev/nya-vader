@@ -28,10 +28,10 @@ window.onload = function() {
 				if(this.age % 2 != 0) return;
 				this.attack_sleep++;
 
-				if(core.input.left) this.x -= 6;
-				if(core.input.right) this.x += 6;
-				if(core.input.up) this.y -= 6;
-				if(core.input.down) this.y += 6;
+				if(core.input.left && this.x > 10) this.x -= 6;
+				if(core.input.right && this.x < 260) this.x += 6;
+				// if(core.input.up) this.y -= 6;
+				// if(core.input.down) this.y += 6;
 				if(core.input.space) {
 					if(this.attack_sleep > 10) {
 						this.attack();
@@ -171,32 +171,36 @@ window.onload = function() {
 	});
 
 	//プレイグラウンド初期化
-	var core = new Core(320, 320);
+	var core = new Core(320, 220);
+	core.scale = 2;
 	core.preload('res/sprite.png');
 	core.preload('res/tokutenLabel.png');
 	core.preload('res/neevoice.wav');
 	core.preload('res/bgm1.mp3');
 	core.keybind( 32, 'space' );	//スペースキーを使えるようにする
 	core.rootScene.backgroundColor = '#000080';
+
+	previewCenter(core);
 	core.onload = function() {
+
 		//プレイヤーキャラの初期化
-		var player = new Player(30,220,32,32);
+		var player = new Player(30,180,32,32);
 		core.rootScene.addChild(player);
 
 		//敵キャラの初期化
 		//uchujin
 		for(var i=0; i<6; i++) {
-			enemys[i] = new Enemy((32*i*1.5)+(2*i),36,32,32,2,2);
+			enemys[i] = new Enemy((32*i*1.3+10)+(2*i),24,32,32,2,2);
 			core.rootScene.addChild(enemys[i]);
 		}
 		//pisuke
 		for(var i=0; i<8; i++) {
-			enemys2[i] = new Enemy((32*i)+(2*i),36*2,32,32,1,1);
+			enemys2[i] = new Enemy((32*i)+(2*i)+3,30*2,32,32,1,1);
 			core.rootScene.addChild(enemys2[i]);
 		}
 		//usagi
 		for(var i=0; i<8; i++) {
-			enemys3[i] = new Enemy((32*i)+(2*i),36*3-6,32,32,0,0);
+			enemys3[i] = new Enemy((32*i)+(2*i)+3,30*3-6,32,32,0,0);
 			core.rootScene.addChild(enemys3[i]);
 		}
 
@@ -240,4 +244,17 @@ window.onload = function() {
 //ログ出力用
 function log(message){
 	if(DBG) console.log(message);
+}
+
+//プレイ画面位置設定
+function previewCenter ( game ){
+    var left = 180;//( window.innerWidth - ( game.width * game.scale )) /2;
+    var top= 90;//( window.innerHeight - ( game.height * game.scale )) /2;
+    $('#enchant-stage').css({
+      "position":"absolute",
+      "left":left+"px",
+      "top":top+"px",
+    });
+    game._pageX = left;
+    game._pageY = top;
 }
