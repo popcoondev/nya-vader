@@ -177,7 +177,7 @@ window.onload = function() {
 	core.preload('res/sprite.png');
 	core.preload('res/tokutenLabel.png');
 	core.preload('res/neevoice.wav');
-	core.preload('res/bgm1.mp3');
+	core.preload('res/bgm1.wav');
 	core.keybind( 32, 'space' );	//スペースキーを使えるようにする
 	core.rootScene.backgroundColor = '#000080';
 
