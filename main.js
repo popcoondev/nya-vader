@@ -22,9 +22,9 @@ window.onload = function() {
 			// this.backgroundColor = 'yellow';
 			this.on('enterframe', function() {
 				if(this.age % 30 == 0) {
-					var sound = core.assets['res/bgm1.wav'];
+					var sound = core.assets['res/bgm1.wav'].play();
 					//sound.volume = 0.1;
-					sound.play();
+					//sound.play();
 				}
 				if(this.age % 2 != 0) return;
 				this.attack_sleep++;
