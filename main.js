@@ -22,7 +22,7 @@ window.onload = function() {
 			this.on('enterframe', function() {
 				if(this.age % 30 == 0) {
 					var sound = core.assets['res/bgm1.mp3'].clone();
-					sound.volume = 0.1;
+					//sound.volume = 0.1;
 					sound.play();
 				}
 				if(this.age % 2 != 0) return;
