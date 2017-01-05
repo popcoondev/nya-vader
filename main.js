@@ -220,16 +220,17 @@ window.onload = function() {
 
 		//Playerタッチ操作
 		var attackFlag = false;
+		var touchSTime = null;
 		core.rootScene.addEventListener('touchstart', function(e) {
-			attackFlag = true;
+			touchSTime = new Date();
 //			player.move(e);
 		});
 		core.rootScene.addEventListener('touchmove', function(e) {
-			attackFlag = false;
 			player.move(e);
 		});
 		core.rootScene.addEventListener('touchend', function(e) {
-			if(attackFlag) {
+			var now = new Date();
+			if(now.getSeconds() - touchSTime.getSeconds() < 1) {
 				player.attack();
 			}
 //			player.move(e);
