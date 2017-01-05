@@ -181,7 +181,7 @@ window.onload = function() {
 	core.keybind( 32, 'space' );	//スペースキーを使えるようにする
 	core.rootScene.backgroundColor = '#000080';
 
-	previewCenter(core);
+	//previewCenter(core);
 	core.onload = function() {
 
 		//プレイヤーキャラの初期化
