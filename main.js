@@ -172,8 +172,8 @@ window.onload = function() {
 	});
 
 	//プレイグラウンド初期化
-	var core = new Core(320, 220);
-	core.scale = 2;
+	var core = new Core(320, 320);
+	//core.scale = 2;
 	core.preload('res/sprite.png');
 	core.preload('res/tokutenLabel.png');
 	core.preload('res/neevoice.wav');
