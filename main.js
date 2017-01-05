@@ -1,4 +1,5 @@
-var DBG = true;
+var DBG = false;
+var MOBILE = true;
 enchant(); //enchant.jsの有効化
 
 window.onload = function() {
@@ -248,6 +249,7 @@ function log(message){
 
 //プレイ画面位置設定
 function previewCenter ( game ){
+    if(MOBILE) return;
     var left = 180;//( window.innerWidth - ( game.width * game.scale )) /2;
     var top= 90;//( window.innerHeight - ( game.height * game.scale )) /2;
     $('#enchant-stage').css({
