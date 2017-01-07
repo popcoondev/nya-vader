@@ -1,5 +1,4 @@
-var DBG = false;
-var MOBILE = true;
+var DBG = true;
 enchant(); //enchant.jsの有効化
 
 window.onload = function() {
@@ -22,9 +21,9 @@ window.onload = function() {
 			// this.backgroundColor = 'yellow';
 			this.on('enterframe', function() {
 				if(this.age % 30 == 0) {
-					//var sound = core.assets['res/bgm1.wav'].clone();
+					var sound = core.assets['res/bgm1.mp3'].clone();
 					//sound.volume = 0.1;
-					//sound.play();
+					sound.play();
 				}
 				if(this.age % 2 != 0) return;
 				this.attack_sleep++;
@@ -42,7 +41,7 @@ window.onload = function() {
 			});
 	    },
 		move: function(e) {
-			this.x = e.localX - 32;
+			this.x = e.localX;
 		},
 		attack: function(){
 			log('attack()');
@@ -172,20 +171,20 @@ window.onload = function() {
 	});
 
 	//プレイグラウンド初期化
-	var core = new Core(320, 420);
-	//core.scale = 2;
+	var core = new Core(320, 220);
+	core.scale = 2;
 	core.preload('res/sprite.png');
 	core.preload('res/tokutenLabel.png');
 	core.preload('res/neevoice.wav');
-	core.preload('res/bgm1.wav');
+	core.preload('res/bgm1.mp3');
 	core.keybind( 32, 'space' );	//スペースキーを使えるようにする
 	core.rootScene.backgroundColor = '#000080';
 
-	//previewCenter(core);
+	previewCenter(core);
 	core.onload = function() {
 
 		//プレイヤーキャラの初期化
-		var player = new Player(30,320,32,32);
+		var player = new Player(30,180,32,32);
 		core.rootScene.addChild(player);
 
 		//敵キャラの初期化
@@ -220,17 +219,16 @@ window.onload = function() {
 
 		//Playerタッチ操作
 		var attackFlag = false;
-		var touchSTime = null;
 		core.rootScene.addEventListener('touchstart', function(e) {
-			touchSTime = new Date();
+			attackFlag = true;
 //			player.move(e);
 		});
 		core.rootScene.addEventListener('touchmove', function(e) {
+			attackFlag = false;
 			player.move(e);
 		});
 		core.rootScene.addEventListener('touchend', function(e) {
-			var now = new Date();
-			if(now.getSeconds() - touchSTime.getSeconds() < 1) {
+			if(attackFlag) {
 				player.attack();
 			}
 //			player.move(e);
@@ -250,7 +248,6 @@ function log(message){
 
 //プレイ画面位置設定
 function previewCenter ( game ){
-    if(MOBILE) return;
     var left = 180;//( window.innerWidth - ( game.width * game.scale )) /2;
     var top= 90;//( window.innerHeight - ( game.height * game.scale )) /2;
     $('#enchant-stage').css({
